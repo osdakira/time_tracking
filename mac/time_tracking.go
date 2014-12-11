@@ -38,13 +38,18 @@ end tell`
 
 func main() {
 	var appName string
+	var i int
 	file, _ := os.OpenFile("tracking.csv", os.O_WRONLY|os.O_CREATE, 0600)
 	writer := csv.NewWriter(file)
 	for {
 		appName = frontAppName()
 		// fmt.Print(appName)
 		writer.Write([]string{appName, time.Now().Format(time.RFC850)})
-		writer.Flush()
 		time.Sleep(1 * 1000 * 1000 * 1000)
+		i++
+		if i%5 == 0 {
+			writer.Flush()
+			i = 0
+		}
 	}
 }
