@@ -44,7 +44,7 @@ func main() {
 	for {
 		appName = frontAppName()
 		// fmt.Print(appName)
-		writer.Write([]string{appName, time.Now().Format(time.RFC850)})
+		writer.Write([]string{time.Now().Format(time.RFC850), appName})
 		time.Sleep(1 * 1000 * 1000 * 1000)
 		i++
 		if i%5 == 0 {
