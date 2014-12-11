@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
+	"time"
 )
 
 func osascript() (path string) {
@@ -33,5 +34,8 @@ end tell`
 }
 
 func main() {
-	fmt.Print(frontAppName())
+	for {
+		fmt.Print(frontAppName())
+		time.Sleep(1 * 1000)
+	}
 }
