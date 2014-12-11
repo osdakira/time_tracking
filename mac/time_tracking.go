@@ -7,12 +7,12 @@ import (
 	"os/exec"
 )
 
-func osascript() string {
+func osascript() (path string) {
 	path, err := exec.LookPath("osascript")
 	if err != nil {
 		log.Fatal(err)
 	}
-	return path
+	return
 }
 
 func main() {
