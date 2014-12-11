@@ -15,7 +15,7 @@ func osascript() (path string) {
 	return
 }
 
-func main() {
+func frontAppName() string {
 	cmd_str := `Tell Application "System Events"
 set frontApp to name of first application process whose frontmost is true
 end tell`
@@ -29,5 +29,9 @@ end tell`
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Print(out.String())
+	return out.String()
+}
+
+func main() {
+	fmt.Print(frontAppName())
 }
