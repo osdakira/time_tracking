@@ -2,9 +2,12 @@ package main
 
 import (
 	"bytes"
-	"fmt"
+	"encoding/csv"
+	// "fmt"
 	"log"
+	"os"
 	"os/exec"
+	"strings"
 	"time"
 )
 
@@ -30,12 +33,18 @@ end tell`
 	if err != nil {
 		log.Fatal(err)
 	}
-	return out.String()
+	return strings.TrimSpace(out.String())
 }
 
 func main() {
+	var appName string
+	file, _ := os.OpenFile("tracking.csv", os.O_WRONLY|os.O_CREATE, 0600)
+	writer := csv.NewWriter(file)
 	for {
-		fmt.Print(frontAppName())
-		time.Sleep(1 * 1000)
+		appName = frontAppName()
+		// fmt.Print(appName)
+		writer.Write([]string{appName, time.Now().Format(time.RFC850)})
+		writer.Flush()
+		time.Sleep(1 * 1000 * 1000 * 1000)
 	}
 }
