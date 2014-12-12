@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -44,7 +45,7 @@ func main() {
 	for {
 		appName = frontAppName()
 		// fmt.Print(appName)
-		writer.Write([]string{time.Now().Format(time.RFC850), appName})
+		writer.Write([]string{strconv.FormatInt(time.Now().Unix(), 10), appName})
 		time.Sleep(1 * 1000 * 1000 * 1000)
 		i++
 		if i%5 == 0 {
